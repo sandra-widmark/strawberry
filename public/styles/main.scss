@@ -1,7 +1,25 @@
+@import 'https://fonts.googleapis.com/css?family=Baloo+Paaji|Baloo+Tamma|Lato|PT+Sans|Prompt';
+
+/* body */
+
+body {
+    background-color: green;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url("../img/tunnelbaneschema.svg");
+    background-image: -moz-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url("../img/tunnelbaneschema.svg");
+    background-image: -o-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url("../img/tunnelbaneschema.svg");
+    background-image: -ms-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url("../img/tunnelbaneschema.svg");
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0.8))), url("../img/tunnelbaneschema.svg");
+    background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url("../img/tunnelbaneschema.svg");
+    font-family: 'PT Sans', sans-serif;
+}
+
 /* nav-bar */
 
-.nav-bar {
-    height: 100px;
+.md-toolbar-tools h1 {
+    font-family: 'Baloo Tamma', cursive;
+    padding: 0 10px;
+    font-size: 50px;
 }
 
 .md-toolbar-tools p {
@@ -10,8 +28,15 @@
     font-weight: bold;
 }
 
+.logo {
+    margin-top: 30px;
+    height: 80px;
+}
+
 /* main content */
 
 .content-div {
     margin: 70px;
 }
+
+
