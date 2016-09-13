@@ -12,6 +12,7 @@ body {
     background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0.8))), url("../img/tunnelbaneschema.svg");
     background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url("../img/tunnelbaneschema.svg");
     font-family: 'PT Sans', sans-serif;
+    background-size: cover;
 }
 
 /* nav-bar */
@@ -32,4 +33,65 @@ body {
 
 .content-div {
     margin: 70px;
+}
+
+.search-input {
+    padding: 10px;
+    border: 0px solid #B0BEC5;
+    border-radius: 10px;
+    width: 500px;
+}
+
+.left-column {
+
+}
+
+.right-column h2 {
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+
+.activity-card {
+    max-width: 600px;
+    margin: 15px auto;
+    padding: 5px;
+}
+
+.md-subhead, .md-headline, .card-paragraph {
+    text-align: left;
+    padding: 0 0 5px 10px;
+}
+
+.md-headline {
+    padding-bottom: 15px;
+}
+
+.description {
+    background-repeat: no-repeat;
+    background-image: url("../img/tbaneskylt.svg");
+    background-position: right;
+    padding: 5px 50px 5px 5px;
+    margin: 20px 0;
+    border-radius: 15px;
+}
+
+
+.filter, .popular-searches {
+    background-repeat: no-repeat;
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url("");
+    background-image: -moz-linear-gradient(top, rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url("");
+    background-image: -o-linear-gradient(top, rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url("");
+    background-image: -ms-linear-gradient(top, rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url("");
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.9)), to(rgba(255,255,255,0.8))), url("../img/tunnelbaneschema.svg");
+    background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url("");
+    background-position: right;
+    padding: 5px 20px;
+    margin: 20px 0;
+    border-radius: 15px;
+
+}
+
+.search {
+    text-align: center;
 }
