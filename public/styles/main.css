@@ -12,19 +12,14 @@ body {
   font-family: 'PT Sans', sans-serif; }
 
 /* nav-bar */
-.md-toolbar-tools h1 {
+.md-toolbar-tools span {
   font-family: 'Baloo Tamma', cursive;
-  padding: 0 10px;
-  font-size: 50px; }
+  padding: 0 10px; }
 
 .md-toolbar-tools p {
   padding: 10px;
   font-size: 16px;
   font-weight: bold; }
-
-.logo {
-  margin-top: 30px;
-  height: 80px; }
 
 /* main content */
 .content-div {

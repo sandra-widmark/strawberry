@@ -6,13 +6,13 @@
     <link rel="stylesheet" type="text/css" href="styles/main.css">
     <!-- Angular Material style sheet -->
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 </head>
 <body ng-app="strawberryApp">
    <md-toolbar md-scroll-schrink class="md-accent nav-bar">
         <div class="md-toolbar-tools">
-            <h1>Smultron</h1>
-            <img src="img/strawberry.svg" class="logo">
-            <h1>STHLM</h1>
+            <span>Smultron STHLM</span>
             <span flex></span>
             <p>Bli medlem</p>
             <p>Logga in</p>
@@ -22,7 +22,43 @@
       <div flex="30" class="left-column">
         <h3>Smultronställen längs med t-banan!</h3>
         <p>Smultron STHLM är en samling av smultronställen längs med Stockholms tunnebanenät, skapade av privatpersoner som vill dela med sig av sina bästa ställen. Oavsett om du är turist eller stockholmsbo kan du här få tips inför semester eller för en mysig eller rolig stund i vardagen. Var med och bidra och spara dina egna favoriter, bli medlem här!</p>
-      </div>
+
+        <input ng-model="user.address" type="text" placeholder="Sök smultronställen" >
+        <md-button class="md-fab" aria-label="Search">
+            <md-icon md-svg-src="img/ic_search_white_24px.svg"></md-icon>
+        </md-button>
+
+        <div layout="column">
+        <h4>Filtera smultronställen:</h4>
+        <md-input-container>
+          <label>Område</label>
+          <md-select ng-model="ctrl.userState">
+            <md-option><em>None</em></md-option>
+            <md-option ng-repeat="state in ctrl.states" ng-value="state.abbrev" ng-disabled="$index === 1">
+              {{state.abbrev}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container>
+          <label>Aktivitet</label>
+          <md-select ng-model="ctrl.userState">
+            <md-option><em>None</em></md-option>
+            <md-option ng-repeat="state in ctrl.states" ng-value="state.abbrev" ng-disabled="$index === 1">
+              {{state.abbrev}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        </div>
+
+        <div layout="column">
+            <md-list flex>
+            <h4>Populäraste sökningarna:</h4>
+            <md-list-item>Sökning 1</md-list-item>
+            <md-list-item>Sökning 2</md-list-item>
+            <md-list-item>Sökning 3</md-list-item>
+        </div>
+
+        </div>
       <div flex="70" class="right-column">
         <p>Höger kolumn</p>
     </div>
