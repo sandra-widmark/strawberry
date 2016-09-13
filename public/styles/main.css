@@ -1,5 +1,4 @@
 @import "https://fonts.googleapis.com/css?family=Baloo+Paaji|Baloo+Tamma|Lato|PT+Sans|Prompt";
-/* body */
 body {
   background-color: green;
   background-repeat: no-repeat;
@@ -12,7 +11,9 @@ body {
   font-family: 'PT Sans', sans-serif;
   background-size: cover; }
 
-/* nav-bar */
+.content-div {
+  margin: 50px; }
+
 .md-toolbar-tools span {
   font-family: 'Baloo Tamma', cursive;
   padding: 0 10px; }
@@ -22,9 +23,20 @@ body {
   font-size: 16px;
   font-weight: bold; }
 
-/* main content */
-.content-div {
-  margin: 70px; }
+.description {
+  background-repeat: no-repeat;
+  background-position: right;
+  padding: 5px;
+  border-radius: 15px; }
+
+.filter, .popular-searches {
+  background-color: white;
+  padding: 5px 20px;
+  margin: 20px 0;
+  border-radius: 15px; }
+
+.search {
+  text-align: center; }
 
 .search-input {
   padding: 10px;
@@ -47,29 +59,5 @@ body {
 
 .md-headline {
   padding-bottom: 15px; }
-
-.description {
-  background-repeat: no-repeat;
-  background-image: url("../img/tbaneskylt.svg");
-  background-position: right;
-  padding: 5px 50px 5px 5px;
-  margin: 20px 0;
-  border-radius: 15px; }
-
-.filter, .popular-searches {
-  background-repeat: no-repeat;
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("");
-  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("");
-  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("");
-  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("");
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.9)), to(rgba(255, 255, 255, 0.8))), url("../img/tunnelbaneschema.svg");
-  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("");
-  background-position: right;
-  padding: 5px 20px;
-  margin: 20px 0;
-  border-radius: 15px; }
-
-.search {
-  text-align: center; }
 
 /*# sourceMappingURL=main.css.map */

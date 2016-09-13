@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('strawberryApp', ['ngRoute', 'ngMaterial']);
+var app = angular.module('strawberryApp', ['ngRoute', 'ngMaterial']);
