@@ -4,6 +4,12 @@ app.directive('mainNavbar', function(){
     };
 });
 
+app.directive('loggedInNavbar', function(){
+    return {
+        templateUrl: 'logged-in-navbar.html'
+    };
+});
+
 app.directive('appDescription', function(){
     return {
         templateUrl: 'app-description.html'
@@ -31,5 +37,12 @@ app.directive('searchField', function(){
 app.directive('activityCards', function(){
     return {
         templateUrl: 'activity-cards.html'
+    };
+});
+
+
+app.directive('userSection', function(){
+    return {
+        templateUrl: 'user-section.html'
     };
 });

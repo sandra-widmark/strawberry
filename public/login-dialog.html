@@ -1,0 +1,28 @@
+<md-dialog aria-label="Logga in"class="dialog">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Logga in</h2>
+        <span flex></span>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+         <md-input-container class="md-block" flex-gt-sm>
+        <label>Användarnamn</label>
+        <input ng-model="user.username">
+    </md-input-container>
+    <md-input-container class="md-block" flex-gt-sm>
+      <label>Lösenord</label>
+      <input ng-model="user.password">
+    </md-input-container>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="hide()">Avbryt</md-button>
+      <md-button ng-click="login()">Logga in</md-button></a>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
+
