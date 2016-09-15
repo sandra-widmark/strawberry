@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('strawberryApp').controller('appController', function($scope, $mdDialog){
+app.controller('dialogController', function($scope, $mdDialog){
 
     $scope.showNewUserDialog = function(ev) {
         $mdDialog.show({
-            controller: dialogController,
+            controller: nextStepController,
             templateUrl: 'new-user-dialog.html',
             parent: angular.element(document.body),
             targetEvent: ev,
@@ -19,7 +19,7 @@ angular.module('strawberryApp').controller('appController', function($scope, $md
 
     $scope.showLoginDialog = function(ev) {
         $mdDialog.show({
-            controller: dialogController,
+            controller: nextStepController,
             templateUrl: 'login-dialog.html',
             parent: angular.element(document.body),
             targetEvent: ev,
@@ -35,7 +35,7 @@ angular.module('strawberryApp').controller('appController', function($scope, $md
 
     $scope.showAddDialog = function(ev) {
         $mdDialog.show({
-            controller: dialogController,
+            controller: nextStepController,
             templateUrl: 'add-dialog.html',
             parent: angular.element(document.body),
             targetEvent: ev,
@@ -48,7 +48,7 @@ angular.module('strawberryApp').controller('appController', function($scope, $md
         });
     };
 
-    function dialogController($scope, $mdDialog) {
+    function nextStepController($scope, $mdDialog) {
         $scope.hide = function() {
           $mdDialog.hide();
         };
