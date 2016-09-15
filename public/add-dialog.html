@@ -1,0 +1,53 @@
+<md-dialog aria-label="Logga in"class="dialog">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Lägg till nytt smultronställe</h2>
+        <span flex></span>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Titel</label>
+          <input ng-model="activity.title" placeholder="Titel som beskriver platsen">
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>Beskrivning</label>
+        <textarea ng-model="activity.description" rows="3" md-select-on-focus placeholder="Beskriv så utförligt du kan platsen och vad den erbjuder"></textarea>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>Adress eller vägbeskrivning</label>
+        <textarea ng-model="activity.location" rows="1" md-select-on-focus placeholder="Saknas exakt adress, beskriv hur man tar sig dit"></textarea>
+      </md-input-container>
+      <div layout="column">
+        <md-input-container>
+          <label>Område</label>
+          <md-select ng-model="controller.areas">
+            <md-option><em>Välj</em></md-option>
+            <md-option ng-repeat="area in areas" ng-value="activity.area" ng-disabled="$index === 1">
+              {{activity.area}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container>
+          <label>Typ av plats eller aktivitet</label>
+          <md-select ng-model="controller.activities">
+            <md-option><em>Välj</em></md-option>
+            <md-option ng-repeat="activity in activities" ng-value="activity.avtivity" ng-disabled="$index === 1">
+              {{activity.activity}}
+            </md-option>
+          </md-select>
+        </div>
+      </md-input-container>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button class="md-raised md-primary" ng-click="hide()">Avbryt</md-button>
+      <md-button class="md-raised md-primary" ng-click="addActivity()">Spara</md-button></a>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
+
+

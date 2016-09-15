@@ -32,6 +32,22 @@ angular.module('strawberryApp').controller('appController', function($scope, $md
         });
     };
 
+
+    $scope.showAddDialog = function(ev) {
+        $mdDialog.show({
+            controller: dialogController,
+            templateUrl: 'add-dialog.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose: true,
+            fullscreen: $scope.customFullscreen //only for xs and sm breakpoints.
+        }).then(function(answer){
+            $scope.status = 'we got this information:' + answer;
+        },function(){
+            console.log('Dialog closed');
+        });
+    };
+
     function dialogController($scope, $mdDialog) {
         $scope.hide = function() {
           $mdDialog.hide();
@@ -41,8 +57,16 @@ angular.module('strawberryApp').controller('appController', function($scope, $md
           $mdDialog.hide(answer);
         };
 
-        $scope.login = function(){
-            console.log("logging in");
+        $scope.addNewUser = function(){
+            console.log("Add new user");
+        };
+
+        $scope.authenticate = function(){
+            console.log("authenticate user");
+        };
+
+        $scope.addActivity = function(){
+            console.log("Add activity");
         }
     }
 
