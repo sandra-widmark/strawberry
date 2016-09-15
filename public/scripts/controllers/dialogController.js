@@ -5,7 +5,7 @@ app.controller('dialogController', function($scope, $mdDialog){
     $scope.showNewUserDialog = function(ev) {
         $mdDialog.show({
             controller: nextStepController,
-            templateUrl: 'new-user-dialog.html',
+            templateUrl: 'templates/new-user-dialog.html',
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose: true,
@@ -20,7 +20,7 @@ app.controller('dialogController', function($scope, $mdDialog){
     $scope.showLoginDialog = function(ev) {
         $mdDialog.show({
             controller: nextStepController,
-            templateUrl: 'login-dialog.html',
+            templateUrl: 'templates/login-dialog.html',
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose: true,
@@ -36,7 +36,7 @@ app.controller('dialogController', function($scope, $mdDialog){
     $scope.showAddDialog = function(ev) {
         $mdDialog.show({
             controller: nextStepController,
-            templateUrl: 'add-dialog.html',
+            templateUrl: 'templates/add-dialog.html',
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose: true,
@@ -48,7 +48,7 @@ app.controller('dialogController', function($scope, $mdDialog){
         });
     };
 
-    function nextStepController($scope, $mdDialog) {
+    function nextStepController($scope, $mdDialog, $location) {
         $scope.hide = function() {
           $mdDialog.hide();
         };
@@ -61,8 +61,10 @@ app.controller('dialogController', function($scope, $mdDialog){
             console.log("Add new user");
         };
 
-        $scope.authenticate = function(){
+        $scope.authenticate = function(path){
             console.log("authenticate user");
+            $mdDialog.hide();
+            $location.path(path);
         };
 
         $scope.addActivity = function(){

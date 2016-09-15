@@ -3,14 +3,15 @@
 var app = angular.module('strawberryApp', ['ngRoute', 'ngMaterial']);
 
 app.config(function($routeProvider){
+
     $routeProvider
 
     .when('/', {
-        templateUrl: 'home.html',
+        templateUrl: 'templates/home.html',
         controller: 'mainController'
     })
 
     .when('/loggedin', {
-        templateUrl: 'logged-in.html',
+        templateUrl: 'templates/logged-in.html',
     });
 });

@@ -1,48 +1,48 @@
 app.directive('mainNavbar', function(){
     return {
-        templateUrl: 'main-navbar.html'
+        templateUrl: 'templates/main-navbar.html'
     };
 });
 
 app.directive('loggedInNavbar', function(){
     return {
-        templateUrl: 'logged-in-navbar.html'
+        templateUrl: 'templates/logged-in-navbar.html'
     };
 });
 
 app.directive('appDescription', function(){
     return {
-        templateUrl: 'app-description.html'
+        templateUrl: 'templates/app-description.html'
     };
 });
 
 app.directive('filter', function(){
     return {
-        templateUrl: 'filter.html'
+        templateUrl: 'templates/filter.html'
     };
 });
 
 app.directive('popularSearches', function(){
     return {
-        templateUrl: 'popular-searches.html'
+        templateUrl: 'templates/popular-searches.html'
     };
 });
 
 app.directive('searchField', function(){
     return {
-        templateUrl: 'search-field.html'
+        templateUrl: 'templates/search-field.html'
     };
 });
 
 app.directive('activityCards', function(){
     return {
-        templateUrl: 'activity-cards.html'
+        templateUrl: 'templates/activity-cards.html'
     };
 });
 
 
 app.directive('userSection', function(){
     return {
-        templateUrl: 'user-section.html'
+        templateUrl: 'templates/user-section.html'
     };
 });
