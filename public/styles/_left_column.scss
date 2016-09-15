@@ -5,6 +5,12 @@
     border-radius: 15px;
 }
 
+.new-user-link {
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .filter, .popular-searches {
     background-color: white;
     padding: 5px 20px;
