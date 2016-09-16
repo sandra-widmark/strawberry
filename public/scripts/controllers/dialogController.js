@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('dialogController', function($scope, $mdDialog){
+app.controller('dialogController', function($scope, $mdDialog, dataService){
 
     $scope.showNewUserDialog = function(ev) {
         $mdDialog.show({
@@ -48,7 +48,7 @@ app.controller('dialogController', function($scope, $mdDialog){
         });
     };
 
-    function nextStepController($scope, $mdDialog, $location) {
+    function nextStepController($scope, $mdDialog, $location, dataService) {
         $scope.hide = function() {
           $mdDialog.hide();
         };
@@ -67,9 +67,40 @@ app.controller('dialogController', function($scope, $mdDialog){
             $location.path(path);
         };
 
-        $scope.addActivity = function(){
-            console.log("Add activity");
-        }
+        //fetch all places from the data service
+
+        dataService.getPlaces(function(res){
+            var places = res.data;
+            $scope.places = places;
+        });
+
+        //Add new place
+
+        $scope.createPlace = function(){
+            var data = {
+                title: $scope.place.title,
+                description: $scope.place.description,
+                location: $scope.place.location
+            };
+            dataService.createPlace(data);
+            console.log('place added!', data);
+
+            $mdDialog.hide();
+        };
+
+        //Tell data service to update existing place
+
+        $scope.updatePlace = function(place,index){
+            dataService.updatePlace(place);
+        };
+
+        //tell data sevice to delete existing place
+
+        $scope.deletePlace = function(place, index){
+            dataService.deletePlace(place).then(function(){
+                places.splice(index,1);
+            });
+        };
     }
 
 });

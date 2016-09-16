@@ -1,4 +1,4 @@
-app.controller('mainController', function($scope, $location){
+app.controller('mainController', function($scope, $location, dataService){
 
     $scope.logout = function(path){
         $location.path(path);
