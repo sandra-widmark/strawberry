@@ -27,7 +27,9 @@ router.post('/places', function(req,res){
     var new_place = {
         title: req.body.title,
         description: req.body.description,
-        location: req.body.location
+        location: req.body.location,
+        area: req.body.area,
+        type_of_place: req.body.type_of_place
     };
 
     Place.create(new_place, function(err, new_place){

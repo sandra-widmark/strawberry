@@ -25,18 +25,16 @@
         <md-input-container>
           <label>Område</label>
           <md-select ng-model="place.area">
-            <md-option><em>Välj</em></md-option>
-            <md-option ng-repeat="area in areas" ng-value="place.area" ng-disabled="$index === 1">
-              {{place.area}}
+            <md-option ng-repeat="area in areas | orderBy: 'name'" ng-value="area">
+              {{area.name}}
             </md-option>
           </md-select>
         </md-input-container>
         <md-input-container>
           <label>Typ av plats eller aktivitet</label>
           <md-select ng-model="place.type_of_place">
-            <md-option><em>Välj</em></md-option>
-            <md-option ng-repeat="type_of_place in type_of_places" ng-value="place.type_of_place" ng-disabled="$index === 1">
-              {{place.type_of_place}}
+            <md-option ng-repeat="place in typeOfPlace | orderBy: 'name'" ng-value="place">
+              {{place.name}}
             </md-option>
           </md-select>
         </div>
