@@ -1,8 +1,8 @@
 @import 'https://fonts.googleapis.com/css?family=Baloo+Paaji|Baloo+Tamma|Lato|PT+Sans|Prompt';
 
-body {
+html {
     background-color: green;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-image: linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url("../img/tunnelbaneschema.svg");
     background-image: -moz-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url("../img/tunnelbaneschema.svg");
     background-image: -o-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url("../img/tunnelbaneschema.svg");
@@ -10,6 +10,25 @@ body {
     background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0.8))), url("../img/tunnelbaneschema.svg");
     background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url("../img/tunnelbaneschema.svg");
     font-family: 'PT Sans', sans-serif;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+body {
+    background-color: green;
+    background-repeat: repeat;
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url("../img/tunnelbaneschema.svg");
+    background-image: -moz-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url("../img/tunnelbaneschema.svg");
+    background-image: -o-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url("../img/tunnelbaneschema.svg");
+    background-image: -ms-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url("../img/tunnelbaneschema.svg");
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0.8))), url("../img/tunnelbaneschema.svg");
+    background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url("../img/tunnelbaneschema.svg");
+    font-family: 'PT Sans', sans-serif;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
 }
 

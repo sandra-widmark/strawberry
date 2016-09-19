@@ -1,47 +1,31 @@
-<md-card class="activity-card">
-    <md-card-title>
-      <md-card-title-text>
-        <span class="md-headline">Mysigt promenadstråk!</span>
-        <span class="md-subhead">Beskrivning:</span>
-        <span class="card-paragraph">Lorem ipusm lorem ipusm lorel ipsum</span>
-        <span class="md-subhead">Vägbeskrivning:</span>
-        <span class="card-paragraph">Lorem ipusm lorem ipusm lorel ipsum</span>
-      </md-card-title-text>
-      <md-card-title-media>
-        <div class="md-media-sm card-media"></div>
-      </md-card-title-media>
-    </md-card-title>
-    <md-card-actions layout="row" layout-align="start center">
-    <md-card-icon-actions>
-      <md-button><md-icon md-svg-icon="img/ic_place_black_36px.svg"></md-icon>Gubbängen</md-button>
-      <md-button><md-icon md-svg-icon="img/ic_rowing_black_36px.svg"></md-icon>Friluftsliv</md-button>
-    </md-card-icon-actions>
-        <md-button class="md-fab md-mini md-primary" aria-label="Search">
-            <md-icon md-svg-src="img/strawberry.svg"></md-icon>
-        </md-button>
-    </md-card-actions>
-</md-card>
+<div ng-controller="mainController">
 
-<md-card class="activity-card">
-    <md-card-title>
-      <md-card-title-text>
-        <span class="md-headline">Mysigt promenadstråk!</span>
-        <span class="md-subhead">Beskrivning:</span>
-        <span class="card-paragraph">Lorem ipusm lorem ipusm lorel ipsum</span>
-        <span class="md-subhead">Vägbeskrivning:</span>
-        <span class="card-paragraph">Lorem ipusm lorem ipusm lorel ipsum</span>
-      </md-card-title-text>
-      <md-card-title-media>
-        <div class="md-media-sm card-media"></div>
-      </md-card-title-media>
-    </md-card-title>
-    <md-card-actions layout="row" layout-align="start center">
-    <md-card-icon-actions>
-      <md-button><md-icon md-svg-icon="img/ic_place_black_36px.svg"></md-icon>Gubbängen</md-button>
-      <md-button><md-icon md-svg-icon="img/ic_rowing_black_36px.svg"></md-icon>Friluftsliv</md-button>
-    </md-card-icon-actions>
-        <md-button class="md-fab md-mini md-primary" aria-label="Search">
-            <md-icon md-svg-src="img/strawberry.svg"></md-icon>
-        </md-button>
-    </md-card-actions>
-</md-card>
+<ul ng-repeat="place in places | orderBy: '-created'" class="activity-card-list">
+  <li>
+    <md-card class="activity-card">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{place.title}}</span>
+            <span class="md-subhead">Beskrivning:</span>
+            <span class="card-paragraph">{{place.description}}</span>
+            <span class="md-subhead">Vägbeskrivning:</span>
+            <span class="card-paragraph">{{place.location}}</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-sm card-media"></div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="start center">
+        <md-card-icon-actions>
+          <md-button><md-icon md-svg-icon="img/ic_place_black_36px.svg"></md-icon>{{place.area}}</md-button>
+          <md-button><md-icon md-svg-icon="img/ic_rowing_black_36px.svg"></md-icon>{{place.type_of_place}}</md-button>
+        </md-card-icon-actions>
+            <md-button class="md-fab md-mini md-primary" aria-label="Search">
+                <md-icon md-svg-src="img/strawberry.svg"></md-icon>
+            </md-button>
+        </md-card-actions>
+    </md-card>
+  </li>
+</ul>
+
+</div>

@@ -16,7 +16,7 @@ router.get('/places', function(req,res){
         if(err){
             return res.status(500).json({message: err.message});
         }
-        res.json({places: places});
+        res.send(places);
         console.log('find places', places);
     });
 });
@@ -29,7 +29,8 @@ router.post('/places', function(req,res){
         description: req.body.description,
         location: req.body.location,
         area: req.body.area,
-        type_of_place: req.body.type_of_place
+        type_of_place: req.body.type_of_place,
+        created: Date.now()
     };
 
     Place.create(new_place, function(err, new_place){

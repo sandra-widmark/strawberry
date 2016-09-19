@@ -69,13 +69,6 @@ app.controller('dialogController', function($scope, $mdDialog, dataService){
             $location.path(path);
         };
 
-        //fetch all places from the data service
-
-        dataService.getPlaces(function(res){
-            var places = res.data;
-            $scope.places = places;
-        });
-
         //Add new place
 
         $scope.createPlace = function(){

@@ -8,7 +8,8 @@ var placeSchema = new mongoose.Schema({
     location: String,
     area: String,
     type_of_place: String,
-    created_by: String
+    created_by: String,
+    created: { type: Date, default: Date.now }
 });
 
 var model = mongoose.model('Place', placeSchema);
