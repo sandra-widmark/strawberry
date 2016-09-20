@@ -11,17 +11,19 @@
       <div class="md-dialog-content">
          <md-input-container class="md-block" flex-gt-sm>
         <label>Välj ett användarnamn</label>
-        <input ng-model="user.username">
+        <input ng-model="user.username" type="text" name="username" ng-click ="clear()">
     </md-input-container>
     <md-input-container class="md-block" flex-gt-sm>
       <label>Välj ett lösenord</label>
-      <input ng-model="user.password">
+      <input ng-model="user.password" type="password" name="password">
+      <p>{{fieldError}}</p>
     </md-input-container>
     </md-dialog-content>
 
     <md-dialog-actions layout="row">
       <md-button class="md-raised md-primary" ng-click="hide()">Avbryt</md-button>
-      <md-button class="md-raised md-primary" ng-click="addNewUser()">Skapa konto</md-button>
+      <md-button class="md-raised md-primary" ng-click="addNewUser('/loggedin')">Skapa konto</md-button>
+
     </md-dialog-actions>
   </form>
 </md-dialog>

@@ -2,6 +2,14 @@
 
 app.service('dataService', function($http){
 
+    //create a new user
+
+    this.createUser = function(data){
+        return $http.post('/api/register', data).then(function(){
+            console.log('dataservice created new user');
+        });
+    };
+
     //get all places
 
     this.getPlaces = function(callback){

@@ -9,6 +9,54 @@ var router = express.Router();
     //console.log('collection removed')
 //});
 
+
+//create new user
+
+router.post('/register', function(req,res){
+    var new_user = {
+        username: req.body.username,
+        password: req.body.password
+    };
+
+    if(req.body.username && req.body.password){
+
+        var callback = function(err,user){
+            if(err) throw err;
+            if (user){
+                console.log('user exists');
+                res.send('user-failure');
+            } else {
+                User.create(new_user, function(err,new_user){
+                    if(err){
+                        return res.status(500).json({err:err.message});
+                    }
+                    res.json({'users': new_user});
+                        console.log('new user added: ' + new_user);
+                });
+            }
+        };
+        User.findOne({
+            username: req.body.username
+        }, callback);
+    }
+    else {
+        var err = new Error('Fyll i alla fält');
+        err.status = 400;
+        return next(err);
+    }
+});
+
+// get all users
+
+router.get('/register', function(req,res){
+    User.find({}, function(err, users){
+        if(err){
+            return res.status(500).json({message: err.message});
+        }
+        res.send(users);
+    });
+});
+
 //get all places
 
 router.get('/places', function(req,res){
@@ -17,7 +65,6 @@ router.get('/places', function(req,res){
             return res.status(500).json({message: err.message});
         }
         res.send(places);
-        console.log('find places', places);
     });
 });
 
@@ -75,7 +122,5 @@ router.delete('/places/:id', function(req,res){
     res.send(place);
     console.log('place deleted!');
 });
-
-
 
 module.exports = router;

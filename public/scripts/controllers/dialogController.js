@@ -10,10 +10,6 @@ app.controller('dialogController', function($scope, $mdDialog, dataService){
             targetEvent: ev,
             clickOutsideToClose: true,
             fullscreen: $scope.customFullscreen //only for xs and sm breakpoints.
-        }).then(function(answer){
-            $scope.status = 'we got this information:' + answer;
-        },function(){
-            console.log('Dialog closed');
         });
     };
 
@@ -25,10 +21,6 @@ app.controller('dialogController', function($scope, $mdDialog, dataService){
             targetEvent: ev,
             clickOutsideToClose: true,
             fullscreen: $scope.customFullscreen //only for xs and sm breakpoints.
-        }).then(function(answer){
-            $scope.status = 'we got this information:' + answer;
-        },function(){
-            console.log('Dialog closed');
         });
     };
 
@@ -41,27 +33,38 @@ app.controller('dialogController', function($scope, $mdDialog, dataService){
             targetEvent: ev,
             clickOutsideToClose: true,
             fullscreen: $scope.customFullscreen //only for xs and sm breakpoints.
-        }).then(function(answer){
-            $scope.status = 'we got this information:' + answer;
-        },function(){
-            console.log('Dialog closed');
         });
     };
 
+    function nextStepController($scope, $mdDialog, $location, dataService, $http) {
 
-
-    function nextStepController($scope, $mdDialog, $location, dataService) {
         $scope.hide = function() {
           $mdDialog.hide();
         };
 
-        $scope.answer = function(answer) {
-          $mdDialog.hide(answer);
+        //add new user
+
+        $scope.addNewUser = function(path){
+            var data = {
+                username: $scope.user.username,
+                password: $scope.user.password
+            };
+
+            if($scope.user.username && $scope.user.password){
+                //$scope.fieldError = 'Användaren finns redan, försök igen';
+                //else {
+                    dataService.createUser(data);
+                    console.log("User added! " + data);
+                    $mdDialog.hide();
+                    $location.path(path);
+                //}
+
+            } else {
+                $scope.fieldError = 'Fyll i alla fält';
+            }
         };
 
-        $scope.addNewUser = function(){
-            console.log("Add new user");
-        };
+        //login
 
         $scope.authenticate = function(path){
             console.log("authenticate user");
@@ -69,7 +72,7 @@ app.controller('dialogController', function($scope, $mdDialog, dataService){
             $location.path(path);
         };
 
-        //Add new place
+        //add new place
 
         $scope.createPlace = function(){
             var data = {
@@ -85,7 +88,7 @@ app.controller('dialogController', function($scope, $mdDialog, dataService){
             $mdDialog.hide();
         };
 
-        //Tell data service to update existing place
+        //tell data service to update existing place
 
         $scope.updatePlace = function(place,index){
             dataService.updatePlace(place);
