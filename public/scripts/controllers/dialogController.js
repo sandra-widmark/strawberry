@@ -50,27 +50,29 @@ app.controller('dialogController', function($scope, $mdDialog, dataService){
                 password: $scope.user.password
             };
 
-            if($scope.user.username && $scope.user.password){
-                //$scope.fieldError = 'Användaren finns redan, försök igen';
-                //else {
-                    dataService.createUser(data);
-                    console.log("User added! " + data);
-                    $mdDialog.hide();
-                    $location.path(path);
-                //}
+            dataService.createUser(data);
+            console.log("Add user" + data);
 
-            } else {
-                $scope.fieldError = 'Fyll i alla fält';
-            }
         };
 
         //login
 
         $scope.authenticate = function(path){
-            console.log("authenticate user");
-            $mdDialog.hide();
-            $location.path(path);
+            var data = {
+                username: $scope.user.username,
+                password: $scope.user.password
+            };
+
+            if($scope.user.username && $scope.user.password){
+                dataService.authenticate(data);
+                console.log("authenticate user: " + data);
+                $mdDialog.hide();
+                $location.path(path);
+            } else {
+                $scope.fieldError = 'Fyll i alla fält';
+            }
         };
+
 
         //add new place
 

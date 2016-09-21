@@ -1,12 +1,27 @@
 'use strict';
 
-app.service('dataService', function($http){
+app.service('dataService', function($http, $mdDialog, $location){
 
     //create a new user
 
-    this.createUser = function(data){
-        return $http.post('/api/register', data).then(function(){
+    this.createUser = function(user){
+        return $http.post('/api/register', user).then(function(result){
             console.log('dataservice created new user');
+            if (result.data.success){
+                console.log(result.data.message);
+                $mdDialog.hide();
+                $location.path('/loggedin');
+            } else {
+                console.log(result.data.message)
+            }
+        });
+    };
+
+    //authenticate user
+
+    this.authenticate = function(data){
+        return $http.post('api/authenticate', data).then(function(data){
+            console.log('dataservice authenticated user');
         });
     };
 

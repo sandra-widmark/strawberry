@@ -11,11 +11,12 @@
       <div class="md-dialog-content">
          <md-input-container class="md-block" flex-gt-sm>
         <label>Användarnamn</label>
-        <input ng-model="user.username">
+        <input ng-model="user.username" type="text" name="username">
     </md-input-container>
     <md-input-container class="md-block" flex-gt-sm>
       <label>Lösenord</label>
-      <input ng-model="user.password">
+      <input ng-model="user.password" type="password" name="password">
+      <p>{{fieldError}}</p>
     </md-input-container>
     </md-dialog-content>
 

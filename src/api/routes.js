@@ -4,47 +4,18 @@ var express = require('express');
 var User = require('../models/users');
 var Place = require('../models/places');
 var router = express.Router();
+var session = require('express-session');
+var bcrypt = require('bcrypt-nodejs');
+
+router.use(session({
+    secret: 'strawberry loves you',
+    resave: true,
+    saveuninitialized: true
+}));
 
 //Place.remove({}, function(err) {
     //console.log('collection removed')
 //});
-
-
-//create new user
-
-router.post('/register', function(req,res){
-    var new_user = {
-        username: req.body.username,
-        password: req.body.password
-    };
-
-    if(req.body.username && req.body.password){
-
-        var callback = function(err,user){
-            if(err) throw err;
-            if (user){
-                console.log('user exists');
-                res.send('user-failure');
-            } else {
-                User.create(new_user, function(err,new_user){
-                    if(err){
-                        return res.status(500).json({err:err.message});
-                    }
-                    res.json({'users': new_user});
-                        console.log('new user added: ' + new_user);
-                });
-            }
-        };
-        User.findOne({
-            username: req.body.username
-        }, callback);
-    }
-    else {
-        var err = new Error('Fyll i alla fält');
-        err.status = 400;
-        return next(err);
-    }
-});
 
 // get all users
 
@@ -53,8 +24,64 @@ router.get('/register', function(req,res){
         if(err){
             return res.status(500).json({message: err.message});
         }
-        res.send(users);
+        res.json(users);
     });
+});
+
+//create new user
+
+router.post('/register', function(req,res){
+    var new_user = {
+        username: req.body.username,
+        password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
+    };
+
+    if(req.body.username && req.body.password){
+        var callback = function(error,user){
+            if(error) {
+                res.send(400, error.message);
+            }
+            if (user){
+                console.log('user exists');
+                res.json({ success:false, message:'Användarnamnet finns redan,försök igen.' });
+            } else {
+                User.create(new_user, function(error,new_user){
+                    if(error){
+                        return res.status(500).json({ message:err.message });
+                    }
+                    res.json({ success: true, message: 'successfully created new user' });
+                    console.log('new user added: ' + new_user);
+                });
+            }
+        };
+        User.findOne({
+            username: req.body.username
+        }, callback);
+    } else {
+        console.log('alla fält inte ifyllda');
+        res.json({ success: false, message: 'Fyll i alla fält' });
+    }
+
+});
+
+//Authenticate user
+
+router.post('/authenticate', function(req,res){
+    var callback = function(err,user){
+        if(user && bcrypt.compareSync(req.body.password,user.password)){
+            console.log('user authenticated');
+            req.session.user = user._id;
+            res.json(user.username);
+        } else {
+            res.json('Kombinationen av användare och lösenord finns inte');
+            console.log('auth failure');
+        }
+    };
+    var params = {
+        username: req.body.username
+    }
+    User.findOne(params, callback);
+
 });
 
 //get all places
