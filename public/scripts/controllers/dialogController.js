@@ -36,7 +36,7 @@ app.controller('dialogController', function($scope, $mdDialog, dataService){
         });
     };
 
-    function nextStepController($scope, $mdDialog, $location, dataService, $http) {
+    function nextStepController($scope, $mdDialog, $location, dataService, $http, $rootScope) {
 
         $scope.hide = function() {
           $mdDialog.hide();
@@ -52,6 +52,10 @@ app.controller('dialogController', function($scope, $mdDialog, dataService){
 
             dataService.createUser(data);
             console.log("Add user" + data);
+            $rootScope.$on('userError', function(event,message){
+                //console.log('this is the event: ' + message);
+                $scope.fieldError = message;
+            });
 
         };
 
@@ -63,14 +67,14 @@ app.controller('dialogController', function($scope, $mdDialog, dataService){
                 password: $scope.user.password
             };
 
-            if($scope.user.username && $scope.user.password){
-                dataService.authenticate(data);
-                console.log("authenticate user: " + data);
-                $mdDialog.hide();
-                $location.path(path);
-            } else {
-                $scope.fieldError = 'Fyll i alla fält';
-            }
+            dataService.authenticate(data);
+            console.log("Authenticate user" + data);
+
+            $rootScope.$on('authError', function(event,message){
+                //console.log('this is the event: ' + message);
+                $scope.fieldError = message;
+            });
+
         };
 
 

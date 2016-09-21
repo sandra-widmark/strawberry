@@ -67,20 +67,25 @@ router.post('/register', function(req,res){
 //Authenticate user
 
 router.post('/authenticate', function(req,res){
-    var callback = function(err,user){
-        if(user && bcrypt.compareSync(req.body.password,user.password)){
-            console.log('user authenticated');
-            req.session.user = user._id;
-            res.json(user.username);
-        } else {
-            res.json('Kombinationen av användare och lösenord finns inte');
-            console.log('auth failure');
+    if(req.body.username && req.body.password){
+        var callback = function(err,user){
+            if(user && bcrypt.compareSync(req.body.password,user.password)){
+                console.log('user authenticated');
+                req.session.userId = user._id;
+                req.session.user = user.username;
+                res.json({ success: true, message: 'successfully authenticated', user: req.session.user });
+            } else {
+                res.json({ success: false, message: 'Kobinationen av användare och lösenord finns inte.' });
+                console.log('auth failure');
+            }
+        };
+        var params = {
+            username: req.body.username
         }
-    };
-    var params = {
-        username: req.body.username
+        User.findOne(params, callback);
+    } else {
+        res.json({ success: false, message: 'Fyll i alla fält' });
     }
-    User.findOne(params, callback);
 
 });
 

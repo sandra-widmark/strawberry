@@ -1,8 +1,10 @@
 'use strict';
 
-app.service('dataService', function($http, $mdDialog, $location){
+app.service('dataService', function($http, $mdDialog, $location, $rootScope){
 
     //create a new user
+
+    var message = 'hej';
 
     this.createUser = function(user){
         return $http.post('/api/register', user).then(function(result){
@@ -12,16 +14,27 @@ app.service('dataService', function($http, $mdDialog, $location){
                 $mdDialog.hide();
                 $location.path('/loggedin');
             } else {
-                console.log(result.data.message)
-            }
+                //console.log(result.data.message);
+                $rootScope.$emit('userError', result.data.message);
+
+            };
         });
     };
 
     //authenticate user
 
     this.authenticate = function(data){
-        return $http.post('api/authenticate', data).then(function(data){
+        return $http.post('api/authenticate', data).then(function(result){
             console.log('dataservice authenticated user');
+            if(result.data.success){
+                $mdDialog.hide();
+                $location.path('/loggedin');
+                $rootScope.$emit('userSession', result.data.user);
+
+            } else {
+                //console.log(result.data.message);
+                $rootScope.$emit('authError', result.data.message);
+            };
         });
     };
 
