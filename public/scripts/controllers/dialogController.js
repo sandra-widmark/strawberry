@@ -74,19 +74,20 @@ app.controller('dialogController', function($scope, $mdDialog, dataService){
                 //console.log('this is the event: ' + message);
                 $scope.fieldError = message;
             });
-
         };
 
 
         //add new place
 
         $scope.createPlace = function(){
+
             var data = {
                 title: $scope.place.title,
                 description: $scope.place.description,
                 location: $scope.place.location,
                 area: $scope.place.area.name,
-                type_of_place: $scope.place.type_of_place.name
+                type_of_place: $scope.place.type_of_place,
+                created_by: $scope.user
             };
             dataService.createPlace(data);
             console.log('place added!', data);
@@ -98,6 +99,7 @@ app.controller('dialogController', function($scope, $mdDialog, dataService){
 
         $scope.updatePlace = function(place,index){
             dataService.updatePlace(place);
+            console.log('save updated place');
         };
 
         //tell data sevice to delete existing place

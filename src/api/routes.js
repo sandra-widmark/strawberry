@@ -6,11 +6,12 @@ var Place = require('../models/places');
 var router = express.Router();
 var session = require('express-session');
 var bcrypt = require('bcrypt-nodejs');
+var sess;
 
 router.use(session({
     secret: 'strawberry loves you',
     resave: true,
-    saveuninitialized: true
+    saveuninitialized: false
 }));
 
 //Place.remove({}, function(err) {
@@ -71,6 +72,7 @@ router.post('/authenticate', function(req,res){
         var callback = function(err,user){
             if(user && bcrypt.compareSync(req.body.password,user.password)){
                 console.log('user authenticated');
+                sess = req.session;
                 req.session.userId = user._id;
                 req.session.user = user.username;
                 res.json({ success: true, message: 'successfully authenticated', user: req.session.user });
@@ -100,6 +102,7 @@ router.get('/places', function(req,res){
     });
 });
 
+
 //create new place
 
 router.post('/places', function(req,res){
@@ -109,7 +112,8 @@ router.post('/places', function(req,res){
         location: req.body.location,
         area: req.body.area,
         type_of_place: req.body.type_of_place,
-        created: Date.now()
+        created: Date.now(),
+        created_by: req.session.user
     };
 
     Place.create(new_place, function(err, new_place){

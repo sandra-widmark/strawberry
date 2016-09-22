@@ -10,6 +10,7 @@ app.controller('mainController', function($scope, $location, dataService, $rootS
         var data = res.data;
         console.log('this is the main controller' + data);
         $scope.places = data;
+        $scope.userplaces = data;
     });
 
 
@@ -20,5 +21,9 @@ app.controller('mainController', function($scope, $location, dataService, $rootS
         $scope.user = user;
     });
 
-});
 
+    $scope.showUserPlaces = function(path){
+        $location.path(path);
+    }
+
+});

@@ -40,6 +40,12 @@ app.directive('activityCards', function(){
     };
 });
 
+app.directive('userCards', function(){
+    return {
+        templateUrl: 'templates/user-cards.html'
+    };
+});
+
 
 app.directive('userSection', function(){
     return {

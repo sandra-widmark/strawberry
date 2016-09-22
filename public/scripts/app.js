@@ -13,5 +13,9 @@ app.config(function($routeProvider){
 
     .when('/loggedin', {
         templateUrl: 'templates/logged-in.html',
+    })
+
+    .when('/loggedin/myplaces', {
+        templateUrl: 'templates/my-places.html'
     });
 });

@@ -4,8 +4,6 @@ app.service('dataService', function($http, $mdDialog, $location, $rootScope){
 
     //create a new user
 
-    var message = 'hej';
-
     this.createUser = function(user){
         return $http.post('/api/register', user).then(function(result){
             console.log('dataservice created new user');
@@ -43,6 +41,7 @@ app.service('dataService', function($http, $mdDialog, $location, $rootScope){
     this.getPlaces = function(callback){
         $http.get('/api/places').then(callback);
     };
+
 
     //Create new place
 
