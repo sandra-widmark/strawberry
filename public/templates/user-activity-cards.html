@@ -1,0 +1,60 @@
+
+<ul ng-repeat="place in places | filter: { created_by: user }" class="activity-card-list">
+  <li>
+    <md-card class="activity-card">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline" ng-model="place.title" ng-hide="place.editing" type="text" name="title">{{place.title}}</span>
+
+            <md-input-container class="md-block" flex-gt-sm ng-show="place.editing">
+              <label>Titel</label>
+              <input ng-model="place.title" type="text" name="title" value="{{place.title}}">
+            </md-input-container>
+
+            <span class="md-subhead">Beskrivning:</span>
+            <span class="card-paragraph" ng-model="place.description" ng-hide="place.editing" type="text" name="description">{{place.description}}</span>
+
+
+            <md-input-container class="md-block" flex-gt-sm ng-show="place.editing">
+              <input ng-model="place.description" type="text" name="description" value="{{place.description}}">
+            </md-input-container>
+
+            <span class="md-subhead">Vägbeskrivning:</span>
+            <span class="card-paragraph" ng-model="place.location" ng-hide="place.editing" type="text" name="location">{{place.location}}</span>
+
+            <md-input-container class="md-block" flex-gt-sm ng-show="place.editing">
+              <input ng-model="place.location" type="text" name="location" value="{{place.location}}">
+            </md-input-container>
+
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-sm card-media"></div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="start center">
+            <md-card-icon-actions>
+            <md-button ng-hide="place.editing"><md-icon md-svg-icon="img/ic_place_black_36px.svg"></md-icon>{{place.area}}</md-button>
+
+            <md-input-container class="md-block" flex-gt-sm ng-show="place.editing">
+              <input ng-model="place.area" type="text" name="area" value="{{place.area}}">
+            </md-input-container>
+
+
+            <md-button ng-hide="place.editing"><md-icon md-svg-icon="img/ic_rowing_black_36px.svg"></md-icon>{{place.type_of_place}}</md-button>
+
+            <md-input-container class="md-block" flex-gt-sm ng-show="place.editing">
+              <input ng-model="place.type_of_place" type="text" name="type_of_place" value="{{place.type_of_place}}">
+            </md-input-container>
+
+
+
+        <md-button>Skapad av: {{place.created_by}}</md-button>
+          </md-card-actions>
+          <md-card-actions layout="row" layout-align="end center">
+            <md-button ng-hide="place.editing" ng-model="editButton" class="md-raised md-primary" ng-click="place.editing = true">Redigera</md-button>
+            <md-button ng-show="place.editing" ng-model="saveButton" class="md-raised md-primary" type="submit"
+            ng-click="updatePlace(place, $index)">Spara</md-button>
+            <md-button  class="md-raised md-primary" type="submit" ng-click="deletePlace(place, $index)">Ta bort</md-button>
+    </md-card>
+  </li>
+</ul>
