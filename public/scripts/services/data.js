@@ -11,6 +11,7 @@ app.service('dataService', function($http, $mdDialog, $location, $rootScope){
                 console.log(result.data.message);
                 $mdDialog.hide();
                 $location.path('/loggedin');
+                $rootScope.$emit('userSession', result.data.user);
             } else {
                 //console.log(result.data.message);
                 $rootScope.$emit('userError', result.data.message);
@@ -46,30 +47,30 @@ app.service('dataService', function($http, $mdDialog, $location, $rootScope){
     //Create new place
 
     this.createPlace = function(data){
-        return $http.post('/api/places', data).then(function(){
+        return $http.post('/api/places', data).then(function(result){
             console.log('dataservice created new place', data);
         });
     };
 
     //Update existing place
 
-    this.updatePlace = function(place){
-        if(!place._id){
-            $http.put('/api/places', place);
+    this.updatePlace = function(data){
+        if(!data._id){
+            console.log('no id!');
         }
-        $http.put('/api/places' + place._id, place).then(function(result){
-            return result.data.place;
+        $http.put('/api/places/' + data._id, data).then(function(result){
+             console.log('dataservice updated place', result);
         });
     };
 
     //delete existing place
 
-    this.deletePlace = function(place){
-        if(!place._id){
-            console.log('error, no id');
+    this.deletePlace = function(data){
+        if(!data._id){
+            console.log('no id!');
         }
-        return $http.delete('/api/places' + place._id).then(function(){
-            console.log(place.title + ' deleted.');
+        return $http.delete('/api/places/' + data._id).then(function(){
+            console.log('Place deleted.');
         });
     };
 

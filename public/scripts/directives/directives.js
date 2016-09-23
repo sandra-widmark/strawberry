@@ -40,12 +40,11 @@ app.directive('activityCards', function(){
     };
 });
 
-app.directive('userCards', function(){
+app.directive('userActivityCards', function(){
     return {
-        templateUrl: 'templates/user-cards.html'
+        templateUrl: 'templates/user-activity-cards.html'
     };
 });
-
 
 app.directive('userSection', function(){
     return {

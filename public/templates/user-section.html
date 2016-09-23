@@ -1,7 +1,6 @@
-<div ng-controller="mainController">
 <p class="user-text">Inloggad som: <span class="user">{{user}}</span></p>
 <md-button class="md-raised md-primary"><md-icon md-svg-icon="img/strawberry.svg"></md-icon>Mina sparade smultron</md-button>
-<md-button class="md-raised md-primary" ng-click="showUserPlaces('/loggedin/myplaces')"><md-icon md-svg-icon="img/ic_place_white_36px.svg"></md-icon>Mina skapade smultronställen</md-button>
+<md-button class="md-raised md-primary" ng-click="showMyPlaces('/loggedin/mycreatedplaces')"><md-icon md-svg-icon="img/ic_place_white_36px.svg"></md-icon>Mina skapade smultronställen</md-button>
 <md-button class="md-raised md-primary" ng-click="showAddDialog($event)"><md-icon md-svg-icon="img/ic_add_circle_outline_white_36px.svg"></md-icon>Lägg till nytt smultronställe</md-button>
-</div>
+
 

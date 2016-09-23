@@ -18,6 +18,7 @@ router.use(session({
     //console.log('collection removed')
 //});
 
+
 // get all users
 
 router.get('/register', function(req,res){
@@ -50,7 +51,9 @@ router.post('/register', function(req,res){
                     if(error){
                         return res.status(500).json({ message:err.message });
                     }
-                    res.json({ success: true, message: 'successfully created new user' });
+                    sess = req.session;
+                    sess.user = new_user.username;
+                    res.json({ success: true, message: 'successfully created new user', user: sess.user });
                     console.log('new user added: ' + new_user);
                 });
             }
@@ -73,9 +76,8 @@ router.post('/authenticate', function(req,res){
             if(user && bcrypt.compareSync(req.body.password,user.password)){
                 console.log('user authenticated');
                 sess = req.session;
-                req.session.userId = user._id;
-                req.session.user = user.username;
-                res.json({ success: true, message: 'successfully authenticated', user: req.session.user });
+                sess.user = user.username;
+                res.json({ success: true, message: 'successfully authenticated', user: sess.user });
             } else {
                 res.json({ success: false, message: 'Kobinationen av användare och lösenord finns inte.' });
                 console.log('auth failure');
@@ -98,6 +100,7 @@ router.get('/places', function(req,res){
         if(err){
             return res.status(500).json({message: err.message});
         }
+        sess = req.session;
         res.send(places);
     });
 });
@@ -106,21 +109,26 @@ router.get('/places', function(req,res){
 //create new place
 
 router.post('/places', function(req,res){
+    sess = req.session;
+    console.log(sess.user);
+
     var new_place = {
         title: req.body.title,
         description: req.body.description,
         location: req.body.location,
         area: req.body.area,
         type_of_place: req.body.type_of_place,
-        created: Date.now(),
-        created_by: req.session.user
+        created_by: sess.user,
+        created: Date.now()
+
     };
 
     Place.create(new_place, function(err, new_place){
         if(err){
+            console.log('Something went wrong');
             return res.status(500).json({err: err.message});
         }
-        res.json({'place': new_place});
+        res.json({ place: new_place });
         console.log('new place added: '+ new_place);
     })
 });
@@ -128,35 +136,39 @@ router.post('/places', function(req,res){
 //update existing place
 
 router.put('/places/:id', function(req,res){
+
+    sess = req.session;
+    console.log(sess.user);
+
     var id = req.params.id;
-    var place = req.body;
-    if(place && place._id !== id){
-        return res.status(500).json({err: "id:s don't match"})
-    }
-    Place.findByIdAndUpdate(id,place, {new: true}, function(err, place){
+    var updated_place = req.body;
+
+    Place.findByIdAndUpdate(id, updated_place, { new: true }, function(err, updated_place){
         if(err){
             return res.status(500).json({err: err.message});
         }
     })
-    res.send(place);
+    res.json({ place: updated_place });
     console.log('place updated!');
 });
 
 //delete existing place
 
 router.delete('/places/:id', function(req,res){
+
+    sess = req.session;
+    console.log(sess.user);
+
     var id = req.params.id;
-    var place = req.body;
-    if(place && place._id !== id){
-        return res.status(500).json({err: "id:s don't match"})
-    }
-    Place.findByIdAndRemove(id,place, {new: true}, function(err, place){
+
+    Place.findByIdAndRemove(id, function(err, result){
         if(err){
             return res.status(500).json({err: err.message});
         }
     })
-    res.send(place);
+    res.json({message: 'place deleted'});
     console.log('place deleted!');
 });
+
 
 module.exports = router;

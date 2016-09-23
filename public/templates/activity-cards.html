@@ -1,32 +1,48 @@
-<div ng-controller="mainController">
-
-<ul ng-repeat="place in places | orderBy: '-created'" class="activity-card-list">
+<ul ng-repeat="place in places" class="activity-card-list">
   <li>
     <md-card class="activity-card">
         <md-card-title>
           <md-card-title-text>
-            <span class="md-headline">{{place.title}}</span>
+            <span class="md-headline" ng-model="place.title" ng-hide="place.editing" type="text" name="title">{{place.title}}</span>
+
+            <md-input-container class="md-block" flex-gt-sm ng-show="place.editing">
+              <label>Titel</label>
+              <input ng-model="place.title" type="text" name="title" value="{{place.title}}">
+            </md-input-container>
+
             <span class="md-subhead">Beskrivning:</span>
-            <span class="card-paragraph">{{place.description}}</span>
+            <span class="card-paragraph" ng-model="place.description" ng-hide="place.editing" type="text" name="description">{{place.description}}</span>
+
+
+            <md-input-container class="md-block" flex-gt-sm ng-show="place.editing">
+              <input ng-model="place.description" type="text" name="description" value="{{place.description}}">
+            </md-input-container>
+
             <span class="md-subhead">Vägbeskrivning:</span>
-            <span class="card-paragraph">{{place.location}}</span>
+            <span class="card-paragraph" ng-model="place.location" ng-hide="place.editing" type="text" name="location">{{place.location}}</span>
+
+            <md-input-container class="md-block" flex-gt-sm ng-show="place.editing">
+              <input ng-model="place.location" type="text" name="location" value="{{place.location}}">
+            </md-input-container>
+
           </md-card-title-text>
           <md-card-title-media>
             <div class="md-media-sm card-media"></div>
           </md-card-title-media>
         </md-card-title>
         <md-card-actions layout="row" layout-align="start center">
-        <md-card-icon-actions>
-          <md-button><md-icon md-svg-icon="img/ic_place_black_36px.svg"></md-icon>{{place.area}}</md-button>
-          <md-button><md-icon md-svg-icon="img/ic_rowing_black_36px.svg"></md-icon>{{place.type_of_place}}</md-button>
-          <md-button>Skapad av: {{place.created_by}}</md-button>
-        </md-card-icon-actions>
-            <md-button class="md-fab md-mini md-primary" aria-label="Search">
-                <md-icon md-svg-src="img/strawberry.svg"></md-icon>
-            </md-button>
-        </md-card-actions>
+            <md-card-icon-actions>
+            <md-button><md-icon md-svg-icon="img/ic_place_black_36px.svg"></md-icon>{{place.area}}</md-button>
+            </md-select>
+            <md-button><md-icon md-svg-icon="img/ic_rowing_black_36px.svg"></md-icon>{{place.type_of_place}}</md-button>
+            <md-button>Skapad av: {{place.created_by}}</md-button>
+          </md-card-actions>
+          <md-card-actions layout="row" layout-align="end center">
+
+            <md-button class="md-fab md-mini md-primary" ng-hide="place.editing" aria-label="Search">
+                  <md-icon md-svg-src="img/strawberry.svg"></md-icon>
+              </md-button>
+          </md-card-actions>
     </md-card>
   </li>
 </ul>
-
-</div>
