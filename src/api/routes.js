@@ -4,14 +4,21 @@ var express = require('express');
 var User = require('../models/users');
 var Place = require('../models/places');
 var router = express.Router();
+var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bcrypt = require('bcrypt-nodejs');
 var sess;
 
+router.use(cookieParser('strawberry'));
 router.use(session({
-    secret: 'strawberry loves you',
+    secret: 'strawberry',
     resave: true,
-    saveuninitialized: false
+    saveuninitialized: false,
+    cookie: {
+        expires: false,
+        httpOnly: false,
+        duration: 30 * 60 * 1000
+    }
 }));
 
 //Place.remove({}, function(err) {
@@ -21,6 +28,8 @@ router.use(session({
 //get json data
 
 router.get('/typeOfPlace', function(req, res){
+
+    sess = req.session;
 
     var typeOfPlace = [
         { name: 'Badplats' },
@@ -40,8 +49,10 @@ router.get('/typeOfPlace', function(req, res){
 })
 
 router.get('/areas', function(req,res){
-    var areas =
-    [
+
+  sess = req.session;
+
+  var areas = [
           { name: "Medborgarplatsen" },
           { name: "Skanstull" },
           { name: "Gullmarsplan" },
@@ -261,6 +272,8 @@ router.post('/places', function(req,res){
             console.log('Something went wrong');
             return res.status(500).json({err: err.message});
         }
+        sess = req.session;
+        console.log(sess.user);
         res.json({ place: new_place });
         console.log('new place added: '+ new_place);
     })

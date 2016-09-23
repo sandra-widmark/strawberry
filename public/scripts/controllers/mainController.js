@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('mainController', function($scope, $mdDialog, dataService, $rootScope, $location, $http){
+app.controller('mainController', function($scope, $mdDialog, dataService, $rootScope, $location, $http, $route){
 
     $http.get('/api/areas').then(function(res){
       $scope.areas = res.data.areas;
@@ -45,11 +45,25 @@ app.controller('mainController', function($scope, $mdDialog, dataService, $rootS
       });
     };
 
-
+    //Show the users created places
 
     $scope.showMyPlaces = function(path){
         console.log('show my places');
         $location.path('/loggedin/mycreatedplaces');
+    }
+
+    //filter on type of places
+
+    $scope.filterPlaces = function(place){
+      console.log(place.type_of_place.name);
+      $scope.placeType = place.type_of_place.name;
+    }
+
+    //filter on areas
+
+    $scope.filterAreas = function(place){
+      console.log(place.area.name);
+      $scope.undergroundArea = place.area.name;
     }
 
 
@@ -144,7 +158,6 @@ app.controller('mainController', function($scope, $mdDialog, dataService, $rootS
             console.log('place added!', data);
 
             $mdDialog.hide();
-            $location.path('/loggedin');
         };
 
       $http.get('/api/typeOfPlace').then(function(res){

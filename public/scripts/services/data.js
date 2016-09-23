@@ -1,6 +1,6 @@
 'use strict';
 
-app.service('dataService', function($http, $mdDialog, $location, $rootScope){
+app.service('dataService', function($http, $mdDialog, $location, $rootScope, $window){
 
     //create a new user
 
@@ -48,7 +48,9 @@ app.service('dataService', function($http, $mdDialog, $location, $rootScope){
 
     this.createPlace = function(data){
         return $http.post('/api/places', data).then(function(result){
-            console.log('dataservice created new place', data);
+            console.log('dataservice created new place', result.data.user);
+            $window.location.reload();
+
         });
     };
 

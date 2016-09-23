@@ -1,5 +1,5 @@
 
-<ul ng-repeat="place in places | filter: { created_by: user }" class="activity-card-list">
+<ul ng-repeat="place in places | filter: { created_by: user, type_of_place: placeType, area: undergroundArea }" class="activity-card-list">
   <li>
     <md-card class="activity-card">
         <md-card-title>
@@ -31,6 +31,7 @@
             <div class="md-media-sm card-media"></div>
           </md-card-title-media>
         </md-card-title>
+
         <md-card-actions layout="row" layout-align="start center">
             <md-card-icon-actions>
             <md-button ng-hide="place.editing"><md-icon md-svg-icon="img/ic_place_black_36px.svg"></md-icon>{{place.area}}</md-button>
@@ -39,22 +40,21 @@
               <input ng-model="place.area" type="text" name="area" value="{{place.area}}">
             </md-input-container>
 
-
             <md-button ng-hide="place.editing"><md-icon md-svg-icon="img/ic_rowing_black_36px.svg"></md-icon>{{place.type_of_place}}</md-button>
 
             <md-input-container class="md-block" flex-gt-sm ng-show="place.editing">
               <input ng-model="place.type_of_place" type="text" name="type_of_place" value="{{place.type_of_place}}">
             </md-input-container>
 
+            <md-button>Skapad av: {{place.created_by}}</md-button>
+        </md-card-actions>
 
-
-        <md-button>Skapad av: {{place.created_by}}</md-button>
-          </md-card-actions>
-          <md-card-actions layout="row" layout-align="end center">
+        <md-card-actions layout="row" layout-align="end center">
             <md-button ng-hide="place.editing" ng-model="editButton" class="md-raised md-primary" ng-click="place.editing = true">Redigera</md-button>
             <md-button ng-show="place.editing" ng-model="saveButton" class="md-raised md-primary" type="submit"
             ng-click="updatePlace(place, $index)">Spara</md-button>
             <md-button  class="md-raised md-primary" type="submit" ng-click="deletePlace(place, $index)">Ta bort</md-button>
+        </md-card-actions>
     </md-card>
   </li>
 </ul>
