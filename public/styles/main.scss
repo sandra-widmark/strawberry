@@ -26,6 +26,7 @@ body {
     background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0.8))), url("../img/tunnelbaneschema.svg");
     background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url("../img/tunnelbaneschema.svg");
     font-family: 'PT Sans', sans-serif;
+    color: #333;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -40,8 +41,54 @@ body {
     padding: 10px;
 }
 
+p {
+    font-size: 20px;
+}
+
+h1 {
+    font-size: 36px;
+    color: #333;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+.footer {
+    padding: 20px;
+    text-align: center;
+}
+
+.footer p {
+    font-size: 16px;
+}
+
 @import 'navbar';
 @import 'left_column';
 @import 'right_column';
 @import 'user_section';
 @import 'dialogs';
+
+
+/********************************************************
+Media queries tablet size
+************************************************************/
+@media screen and (max-width: 992px) {
+
+.activity-card {
+    max-width: 500px;
+}
+
+}
+
+/********************************************************
+Media queries mobile size
+************************************************************/
+@media screen and (max-width: 767px) {
+
+
+}

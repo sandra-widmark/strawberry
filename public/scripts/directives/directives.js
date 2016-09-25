@@ -22,18 +22,6 @@ app.directive('filter', function(){
     };
 });
 
-app.directive('popularSearches', function(){
-    return {
-        templateUrl: 'templates/popular-searches.html'
-    };
-});
-
-app.directive('searchField', function(){
-    return {
-        templateUrl: 'templates/search-field.html'
-    };
-});
-
 app.directive('activityCards', function(){
     return {
         templateUrl: 'templates/activity-cards.html'

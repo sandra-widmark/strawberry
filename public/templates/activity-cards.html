@@ -7,7 +7,7 @@
 
             <md-input-container class="md-block" flex-gt-sm ng-show="place.editing">
               <label>Titel</label>
-              <input ng-model="place.title" type="text" name="title" value="{{place.title}}">
+              <input ng-model="place.title" type="text" name="title" value="{{place.title}}" aria-label="title">
             </md-input-container>
 
             <span class="md-subhead">Beskrivning:</span>
@@ -15,14 +15,14 @@
 
 
             <md-input-container class="md-block" flex-gt-sm ng-show="place.editing">
-              <input ng-model="place.description" type="text" name="description" value="{{place.description}}">
+              <input ng-model="place.description" type="text" name="description" value="{{place.description}}" aria-label="description">
             </md-input-container>
 
             <span class="md-subhead">Vägbeskrivning:</span>
             <span class="card-paragraph" ng-model="place.location" ng-hide="place.editing" type="text" name="location">{{place.location}}</span>
 
             <md-input-container class="md-block" flex-gt-sm ng-show="place.editing">
-              <input ng-model="place.location" type="text" name="location" value="{{place.location}}">
+              <input ng-model="place.location" type="text" name="location" value="{{place.location}}" aria-label="location">
             </md-input-container>
 
           </md-card-title-text>

@@ -8,7 +8,7 @@
 
             <md-input-container class="md-block" flex-gt-sm ng-show="place.editing">
               <label>Titel</label>
-              <input ng-model="place.title" type="text" name="title" value="{{place.title}}">
+              <input ng-model="place.title" type="text" name="title" value="{{place.title}}" aria-label="location">
             </md-input-container>
 
             <span class="md-subhead">Beskrivning:</span>
@@ -16,14 +16,14 @@
 
 
             <md-input-container class="md-block" flex-gt-sm ng-show="place.editing">
-              <input ng-model="place.description" type="text" name="description" value="{{place.description}}">
+              <input ng-model="place.description" type="text" name="description" value="{{place.description}}" aria-label="location">
             </md-input-container>
 
             <span class="md-subhead">Vägbeskrivning:</span>
             <span class="card-paragraph" ng-model="place.location" ng-hide="place.editing" type="text" name="location">{{place.location}}</span>
 
             <md-input-container class="md-block" flex-gt-sm ng-show="place.editing">
-              <input ng-model="place.location" type="text" name="location" value="{{place.location}}">
+              <input ng-model="place.location" type="text" name="location" value="{{place.location}}" aria-label="location">
             </md-input-container>
 
           </md-card-title-text>
@@ -37,13 +37,13 @@
             <md-button ng-hide="place.editing"><md-icon md-svg-icon="img/ic_place_black_36px.svg"></md-icon>{{place.area}}</md-button>
 
             <md-input-container class="md-block" flex-gt-sm ng-show="place.editing">
-              <input ng-model="place.area" type="text" name="area" value="{{place.area}}">
+              <input ng-model="place.area" type="text" name="area" value="{{place.area}}" aria-label="area">
             </md-input-container>
 
             <md-button ng-hide="place.editing"><md-icon md-svg-icon="img/ic_rowing_black_36px.svg"></md-icon>{{place.type_of_place}}</md-button>
 
             <md-input-container class="md-block" flex-gt-sm ng-show="place.editing">
-              <input ng-model="place.type_of_place" type="text" name="type_of_place" value="{{place.type_of_place}}">
+              <input ng-model="place.type_of_place" type="text" name="type_of_place" value="{{place.type_of_place}}" aria-label="type_of_place">
             </md-input-container>
 
             <md-button>Skapad av: {{place.created_by}}</md-button>
