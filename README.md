@@ -30,8 +30,7 @@ This is a collection of special places in Stockholm, created by users. You can r
 
 Connect to mongoDB on your terminal and make sure that it its running locally on the default port.
 
-- The database is called Smultron-sthlm and have two collections:
-- users - the registered users.
-- places - the users' created places that shows in the feed.
+- Database name: smultron-sthlm
+- Collection names: users, places
 
 Made by Sandra Widmark
