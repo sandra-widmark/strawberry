@@ -43,14 +43,12 @@ app.service('dataService', function($http, $mdDialog, $location, $rootScope, $wi
         $http.get('/api/places').then(callback);
     };
 
-
     //Create new place
 
     this.createPlace = function(data){
         return $http.post('/api/places', data).then(function(result){
             console.log('dataservice created new place', result.data.user);
             $window.location.reload();
-
         });
     };
 
@@ -75,6 +73,4 @@ app.service('dataService', function($http, $mdDialog, $location, $rootScope, $wi
             console.log('Place deleted.');
         });
     };
-
-
 });

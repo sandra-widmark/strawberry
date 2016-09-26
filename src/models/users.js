@@ -5,9 +5,7 @@ var bcrypt = require('bcrypt-nodejs');
 
 var userSchema = new mongoose.Schema({
     username: String,
-    password: String,
-    liked_places: [String],
-    created_places: [String]
+    password: String
 });
 
 var model = mongoose.model('User', userSchema);

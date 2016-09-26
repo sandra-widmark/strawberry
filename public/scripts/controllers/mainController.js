@@ -36,7 +36,6 @@ app.controller('mainController', function($scope, $mdDialog, dataService, $rootS
         console.log('save updated place' + place.title);
     };
 
-
     //tell data sevice to delete existing place
 
    $scope.deletePlace = function(place, index) {
@@ -66,7 +65,6 @@ app.controller('mainController', function($scope, $mdDialog, dataService, $rootS
       $scope.undergroundArea = place.area.name;
     }
 
-
     $scope.showNewUserDialog = function(ev) {
         $mdDialog.show({
             controller: dialogController,
@@ -88,7 +86,6 @@ app.controller('mainController', function($scope, $mdDialog, dataService, $rootS
             fullscreen: $scope.customFullscreen //only for xs and sm breakpoints.
         });
     };
-
 
     $scope.showAddDialog = function(ev) {
         $mdDialog.show({
@@ -121,7 +118,6 @@ app.controller('mainController', function($scope, $mdDialog, dataService, $rootS
                 //console.log('this is the event: ' + message);
                 $scope.fieldError = message;
             });
-
         };
 
         //login
@@ -141,7 +137,6 @@ app.controller('mainController', function($scope, $mdDialog, dataService, $rootS
             });
         };
 
-
         //add new place
 
         $scope.createPlace = function(){
@@ -160,15 +155,14 @@ app.controller('mainController', function($scope, $mdDialog, dataService, $rootS
             $mdDialog.hide();
         };
 
-      $http.get('/api/typeOfPlace').then(function(res){
-        $scope.typeOfPlace = res.data.typeOfPlace;
-      });
+        //Fetch data from backend
 
+        $http.get('/api/typeOfPlace').then(function(res){
+            $scope.typeOfPlace = res.data.typeOfPlace;
+        });
 
-      $http.get('/api/areas').then(function(res){
-        $scope.areas = res.data.areas;
-      });
-
+        $http.get('/api/areas').then(function(res){
+            $scope.areas = res.data.areas;
+       });
     }
-
 });
