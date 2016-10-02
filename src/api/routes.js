@@ -124,7 +124,7 @@ router.post('/isLoggedIn', function(req, res) {
 router.get('/isLoggedIn', function(req,res){
     sess = req.session;
     console.log(sess.user);
-    if(sess){
+    if(sess && sess.user){
         res.json({ success: true, user: sess.user });
     }
     else {
