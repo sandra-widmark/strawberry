@@ -9,7 +9,6 @@ var router = express.Router();
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bcrypt = require('bcrypt-nodejs');
-var sess;
 
 router.use(cookieParser('strawberry'));
 router.use(session({
@@ -23,9 +22,11 @@ router.use(session({
     }
 }));
 
-//Place.remove({}, function(err) {
-    //console.log('collection removed')
-//});
+var sess;
+
+// Place.remove({}, function(err) {
+//     console.log('collection removed')
+// });
 
 //get json data
 
@@ -90,16 +91,16 @@ router.post('/register', function(req,res){
 
 //Authenticate user
 
-router.post('/authenticate', function(req,res){
+router.post('/authenticate', function(req,res, next){
     if(req.body.username && req.body.password){
         var callback = function(err,user){
             if(user && bcrypt.compareSync(req.body.password,user.password)){
-                console.log('user authenticated');
                 sess = req.session;
-                sess.user = user.username;
-                res.json({ success: true, message: 'successfully authenticated', user: sess.user });
+                req.session.username = req.body.username;
+                console.log('user authenticated :', req.session.username);
+                res.json({ success: true, message: 'successfully authenticated', user: req.session.username });
             } else {
-                res.json({ success: false, message: 'Kobinationen av användare och lösenord finns inte.' });
+                res.json({ success: false, message: 'Kombinationen av användare och lösenord finns inte.' });
                 console.log('auth failure');
             }
         };
@@ -110,7 +111,26 @@ router.post('/authenticate', function(req,res){
     } else {
         res.json({ success: false, message: 'Fyll i alla fält' });
     }
+});
 
+//check if user is logged in
+router.post('/isLoggedIn', function(req, res) {
+    sess = req.session;
+    sess.user = req.body.user;
+    console.log('this is req.body.user: ', sess.user);
+    res.json({success: true, user: sess.user});
+});
+
+router.get('/isLoggedIn', function(req,res){
+    sess = req.session;
+    console.log(sess.user);
+    if(sess){
+        res.json({ success: true, user: sess.user });
+    }
+    else {
+        //console.log('user session does not exist');
+        res.json({ success: false, user: null });
+    }
 });
 
 //get all places
@@ -118,10 +138,10 @@ router.post('/authenticate', function(req,res){
 router.get('/places', function(req,res){
     Place.find({}, function(err, places){
         if(err){
-            return res.status(500).json({message: err.message});
+            return res.status(500).json({ message: err.message });
         }
         sess = req.session;
-        res.send(places);
+        res.json(places);
     });
 });
 
@@ -139,19 +159,18 @@ router.post('/places', function(req,res){
         type_of_place: req.body.type_of_place,
         created_by: sess.user,
         created: Date.now()
-
     };
 
-    Place.create(new_place, function(err, new_place){
+    Place.create(new_place, function(err, place){
         if(err){
             console.log('Something went wrong');
             return res.status(500).json({err: err.message});
         }
         sess = req.session;
         console.log(sess.user);
-        res.json({ place: new_place });
-        console.log('new place added: '+ new_place);
-    })
+        res.json(place);
+        console.log('new place added: '+ place);
+    });
 });
 
 //update existing place

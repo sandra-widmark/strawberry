@@ -1,6 +1,19 @@
-'use strict';
+'usere strict';
 
 app.controller('mainController', function($scope, $mdDialog, dataService, $rootScope, $location, $http, $route){
+
+    $http.get('/api/isLoggedIn').then(function(res){
+        if (res.data.success){
+             $scope.userSession = res.data.user;
+        } else {
+            $location.path('/');
+        }
+    });
+
+    $rootScope.$on('userSession', function(event,data){
+        $scope.userSession = data;
+    });
+
 
     $http.get('/api/areas').then(function(res){
       $scope.areas = res.data.areas;
@@ -20,13 +33,6 @@ app.controller('mainController', function($scope, $mdDialog, dataService, $rootS
         var data = res.data;
         console.log('this is the main controller' + data);
         $scope.places = data;
-    });
-
-    //show the user session
-
-    $rootScope.$on('userSession', function(event,user){
-        console.log('this is the event: ' + user);
-        $scope.user = user;
     });
 
     $scope.updatePlace = function(place, index){
@@ -67,9 +73,9 @@ app.controller('mainController', function($scope, $mdDialog, dataService, $rootS
 
     $scope.showNewUserDialog = function(ev) {
         $mdDialog.show({
-            controller: dialogController,
             templateUrl: 'templates/new-user-dialog.html',
             parent: angular.element(document.body),
+            scope: $scope,
             targetEvent: ev,
             clickOutsideToClose: true,
             fullscreen: $scope.customFullscreen //only for xs and sm breakpoints.
@@ -78,9 +84,9 @@ app.controller('mainController', function($scope, $mdDialog, dataService, $rootS
 
     $scope.showLoginDialog = function(ev) {
         $mdDialog.show({
-            controller: dialogController,
             templateUrl: 'templates/login-dialog.html',
             parent: angular.element(document.body),
+            scope: $scope,
             targetEvent: ev,
             clickOutsideToClose: true,
             fullscreen: $scope.customFullscreen //only for xs and sm breakpoints.
@@ -89,18 +95,17 @@ app.controller('mainController', function($scope, $mdDialog, dataService, $rootS
 
     $scope.showAddDialog = function(ev) {
         $mdDialog.show({
-            controller: dialogController,
             templateUrl: 'templates/add-dialog.html',
             parent: angular.element(document.body),
+            scope: $scope,
             targetEvent: ev,
             clickOutsideToClose: true,
             fullscreen: $scope.customFullscreen //only for xs and sm breakpoints.
         });
     };
 
-    function dialogController($scope, $mdDialog, $location, dataService, $http, $rootScope) {
 
-        $scope.hide = function() {
+    $scope.hide = function() {
           $mdDialog.hide();
         };
 
@@ -128,20 +133,25 @@ app.controller('mainController', function($scope, $mdDialog, dataService, $rootS
                 password: $scope.user.password
             };
 
-            dataService.authenticate(data);
-            console.log("Authenticate user" + data);
+            dataService.authenticate(data).then(function(res){
+                console.log("Authenticate user" + res.data.user);
 
-            $rootScope.$on('authError', function(event,message){
-                //console.log('this is the event: ' + message);
-                $scope.fieldError = message;
+                if(res.data.success){
+                    $mdDialog.hide();
+                    $location.path('/loggedin');
+                    dataService.postUserSession(res.data);
+                    $rootScope.$emit('userSession', res.data.user);
+                } else {
+                    $scope.fieldError = res.data.message;
+                }
+
             });
+
         };
 
         //add new place
 
         $scope.createPlace = function(){
-          console.log('this is scope.user ' + $scope.user);
-
             var data = {
                 title: $scope.place.title,
                 description: $scope.place.description,
@@ -149,10 +159,12 @@ app.controller('mainController', function($scope, $mdDialog, dataService, $rootS
                 area: $scope.place.area.name,
                 type_of_place: $scope.place.type_of_place.name,
             };
-            dataService.createPlace(data);
-            console.log('place added!', data);
 
-            $mdDialog.hide();
+            dataService.createPlace(data).then(function(res) {
+                console.log(res.data);
+                $scope.places.push(res.data);
+                $mdDialog.hide();
+            });
         };
 
         //Fetch data from backend
@@ -164,5 +176,16 @@ app.controller('mainController', function($scope, $mdDialog, dataService, $rootS
         $http.get('/api/areas').then(function(res){
             $scope.areas = res.data.areas;
        });
-    }
+});
+
+app.controller('filterController', function($http, $scope){
+
+    $http.get('/api/areas').then(function(res){
+      $scope.areas = res.data.areas;
+    });
+
+    $http.get('/api/typeOfPlace').then(function(res){
+      $scope.typeOfPlace = res.data.typeOfPlace;
+    });
+
 });

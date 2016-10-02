@@ -1,21 +1,23 @@
-<section class="filter">
-  <div layout="column">
-  <h4>Filtrera smultronställen:</h4>
-  <md-input-container>
-    <label>Område</label>
-    <md-select ng-model="place.area" ng-change="filterAreas(place)">
-        <md-option ng-repeat="area in areas | orderBy: 'name'" ng-value="area">
-        {{area.name}}
-        </md-option>
-    </md-select>
-  </md-input-container>
-  <md-input-container>
-    <label>Typ av plats eller aktivitet</label>
-    <md-select ng-model="place.type_of_place" ng-change="filterPlaces(place)">
-        <md-option ng-repeat="place in typeOfPlace | orderBy: 'name'" ng-value="place">
-          {{place.name}}
-        </md-option>
-    </md-select>
-  </md-input-container>
-  </div>
-</section>
+<div ng-controller ="filterController">
+  <section class="filter">
+    <div layout="column">
+    <h4>Filtrera smultronställen:</h4>
+    <md-input-container>
+      <label>Område</label>
+      <md-select ng-model="place.area" ng-change="filterAreas(place)">
+          <md-option ng-repeat="area in areas | orderBy: 'name'" ng-value="area">
+          {{area.name}}
+          </md-option>
+      </md-select>
+    </md-input-container>
+    <md-input-container>
+      <label>Typ av plats eller aktivitet</label>
+      <md-select ng-model="place.type_of_place" ng-change="filterPlaces(place)">
+          <md-option ng-repeat="place in typeOfPlace | orderBy: 'name'" ng-value="place">
+            {{place.name}}
+          </md-option>
+      </md-select>
+    </md-input-container>
+    </div>
+  </section>
+</div>
