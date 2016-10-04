@@ -24,20 +24,20 @@ router.use(session({
 
 var sess;
 
-// Place.remove({}, function(err) {
-//     console.log('collection removed')
-// });
+/*User.remove({}, function(err) {
+    console.log('collection removed')
+});*/
 
 //get json data
 
 router.get('/typeOfPlace', function(req, res){
   var typeOfPlace = typeofplace;
-  res.json({typeOfPlace: typeOfPlace});
+  res.json({ typeOfPlace: typeOfPlace });
 });
 
 router.get('/areas', function(req,res){
   var cityAreas = areas;
-  res.json({areas: cityAreas});
+  res.json({ areas: cityAreas });
 });
 
 // get all users
@@ -58,7 +58,6 @@ router.post('/register', function(req,res){
         username: req.body.username,
         password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
     };
-
     if(req.body.username && req.body.password){
         var callback = function(error,user){
             if(error) {
@@ -86,7 +85,6 @@ router.post('/register', function(req,res){
         console.log('alla fält inte ifyllda');
         res.json({ success: false, message: 'Fyll i alla fält' });
     }
-
 });
 
 //Authenticate user
@@ -96,9 +94,9 @@ router.post('/authenticate', function(req,res, next){
         var callback = function(err,user){
             if(user && bcrypt.compareSync(req.body.password,user.password)){
                 sess = req.session;
-                req.session.username = req.body.username;
-                console.log('user authenticated :', req.session.username);
-                res.json({ success: true, message: 'successfully authenticated', user: req.session.username });
+                sess.user = req.body.username;
+                console.log('user authenticated :', sess.user);
+                res.json({ success: true, message: 'successfully authenticated', user: sess.user });
             } else {
                 res.json({ success: false, message: 'Kombinationen av användare och lösenord finns inte.' });
                 console.log('auth failure');
@@ -114,11 +112,16 @@ router.post('/authenticate', function(req,res, next){
 });
 
 //check if user is logged in
+
 router.post('/isLoggedIn', function(req, res) {
     sess = req.session;
     sess.user = req.body.user;
-    console.log('this is req.body.user: ', sess.user);
-    res.json({success: true, user: sess.user});
+    if(sess && sess.user){
+        res.json({ success: true, user: sess.user });
+    }
+    else {
+        res.json({ success: false, user: null });
+    }
 });
 
 router.get('/isLoggedIn', function(req,res){
@@ -128,7 +131,6 @@ router.get('/isLoggedIn', function(req,res){
         res.json({ success: true, user: sess.user });
     }
     else {
-        //console.log('user session does not exist');
         res.json({ success: false, user: null });
     }
 });
@@ -167,7 +169,6 @@ router.post('/places', function(req,res){
             return res.status(500).json({err: err.message});
         }
         sess = req.session;
-        console.log(sess.user);
         res.json(place);
         console.log('new place added: '+ place);
     });
@@ -176,10 +177,7 @@ router.post('/places', function(req,res){
 //update existing place
 
 router.put('/places/:id', function(req,res){
-
     sess = req.session;
-    console.log(sess.user);
-
     var id = req.params.id;
     var updated_place = req.body;
 
@@ -195,19 +193,20 @@ router.put('/places/:id', function(req,res){
 //delete existing place
 
 router.delete('/places/:id', function(req,res){
-
     sess = req.session;
-    console.log(sess.user);
-
     var id = req.params.id;
 
     Place.findByIdAndRemove(id, function(err, result){
         if(err){
             return res.status(500).json({err: err.message});
         }
-    })
-    res.json({message: 'place deleted'});
-    console.log('place deleted!');
+        res.json({ place: id });
+        console.log('place deleted!');
+    });
+});
+
+router.get('/logout', function(req,res){
+    req.session.destroy();
 });
 
 module.exports = router;

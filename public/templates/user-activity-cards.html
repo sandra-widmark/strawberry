@@ -1,5 +1,5 @@
 
-<ul ng-repeat="place in places | filter: { created_by: user, type_of_place: placeType, area: undergroundArea }" class="activity-card-list">
+<ul ng-repeat="place in places | filter: { created_by: user }" class="activity-card-list">
   <li>
     <md-card class="activity-card">
         <md-card-title>
@@ -8,7 +8,7 @@
 
             <md-input-container class="md-block" flex-gt-sm ng-show="place.editing">
               <label>Titel</label>
-              <input ng-model="place.title" type="text" name="title" value="{{place.title}}" aria-label="location">
+              <input ng-model="place.title" type="text" name="title" value="{{place.title}}" aria-label="title">
             </md-input-container>
 
             <span class="md-subhead">Beskrivning:</span>
@@ -16,7 +16,7 @@
 
 
             <md-input-container class="md-block" flex-gt-sm ng-show="place.editing">
-              <input ng-model="place.description" type="text" name="description" value="{{place.description}}" aria-label="location">
+              <input ng-model="place.description" type="text" name="description" value="{{place.description}}" aria-label="description">
             </md-input-container>
 
             <span class="md-subhead">Vägbeskrivning:</span>
@@ -52,7 +52,7 @@
         <md-card-actions layout="row" layout-align="end center">
             <md-button ng-hide="place.editing" ng-model="editButton" class="md-raised md-primary" ng-click="place.editing = true">Redigera</md-button>
             <md-button ng-show="place.editing" ng-model="saveButton" class="md-raised md-primary" type="submit"
-            ng-click="updatePlace(place, $index)">Spara</md-button>
+            ng-click="updatePlace(place, $index); place.editing = false">Spara</md-button>
             <md-button  class="md-raised md-primary" type="submit" ng-click="deletePlace(place, $index)">Ta bort</md-button>
         </md-card-actions>
     </md-card>

@@ -1,5 +1,7 @@
 <section class="user-section">
-    <p class="user-text">Inloggad som: <span class="user">{{userSession}}</span></p>
+    <p class="user-text">Inloggad som: <span class="user">{{user}}</span></p>
     <md-button class="md-raised md-primary" ng-click="showMyPlaces('/loggedin/mycreatedplaces')"><md-icon md-svg-icon="img/strawberry.svg"></md-icon>Mina skapade smultronställen</md-button>
-    <md-button class="md-raised md-primary" ng-click="showAddDialog($event)"><md-icon md-svg-icon="img/ic_place_white_36px.svg"></md-icon>Lägg till nytt smultronställe</md-button>
+    <div ng-controller="dialogController">
+        <md-button class="md-raised md-primary" ng-click="showAddDialog($event)"><md-icon md-svg-icon="img/ic_place_white_36px.svg"></md-icon>Lägg till nytt smultronställe</md-button>
+    </div>
 </section>
