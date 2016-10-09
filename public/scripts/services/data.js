@@ -20,6 +20,8 @@ app.service('dataService', function($http){
         return $http.post('/api/authenticate', data);
     };
 
+    //Logout user
+
     this.logout = function(){
         $http.get('/api/logout');
     };

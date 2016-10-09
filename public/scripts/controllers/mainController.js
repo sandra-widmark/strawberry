@@ -3,10 +3,11 @@
 app.controller('mainController', function($scope, $mdDialog, dataService, $rootScope, $location, $http, $route){
 
     //check if user is loggedin
+
     $scope.$on('$routeChangeStart', function (e, next, current, path) {
         $http.get('/api/isLoggedIn').then(function(res){
             if (res.data.success){
-                 $scope.user = res.data.user;
+                 $scope.usersession = res.data.user;
             } else {
                 $location.path('/');
             }
@@ -16,7 +17,7 @@ app.controller('mainController', function($scope, $mdDialog, dataService, $rootS
     //Show logged in user
 
     $rootScope.$on('userSession', function(event,data){
-        $scope.user = data;
+        $scope.usersession = data;
     });
 
     //Log out function
@@ -29,12 +30,6 @@ app.controller('mainController', function($scope, $mdDialog, dataService, $rootS
             $scope.places = data;
         });
     }
-
-    //Hide md dialog function
-
-    $scope.hide = function() {
-        $mdDialog.hide();
-    };
 
     //fetch all places from the data service
 

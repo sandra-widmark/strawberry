@@ -97,4 +97,10 @@ app.controller('dialogController', function($http, $scope, $mdDialog, dataServic
         });
     };
 
+    //Hide md dialog function
+
+    $scope.hide = function() {
+        $mdDialog.hide();
+    };
+
 });
